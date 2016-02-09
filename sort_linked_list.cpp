@@ -45,24 +45,26 @@ ListNode* merge2Lists(ListNode* L1, ListNode* L2) {
 }
 
 ListNode* sortList(ListNode* head) {
-        if (!head || !head->next) {
-            return head;
-        }
-        ListNode* fast = head;
-        ListNode* slow = head;
+    // Return if no node or only one node
+    if (!head || !head->next) {
+        return head;
+    }
+    ListNode* fast = head;
+    ListNode* slow = head;
 
-        while (fast->next && fast->next->next) {
-            fast = fast->next->next;
-            slow = slow->next;
-        }
-        // Cut this list to two parts
-        fast = slow;
+    // Find the middle node
+    while (fast->next && fast->next->next) {
+        fast = fast->next->next;
         slow = slow->next;
-        fast->next = NULL;
-        ListNode* L1 = sortList(head);
-        ListNode* L2 = sortList(slow);
+    }
+    // Cut this list to two parts
+    fast = slow;
+    slow = slow->next;
+    fast->next = NULL;
+    ListNode* L1 = sortList(head);
+    ListNode* L2 = sortList(slow);
 
-        return merge2Lists(L1, L2);
+    return merge2Lists(L1, L2);
 }
 
 int main() {
