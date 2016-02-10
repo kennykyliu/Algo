@@ -49,11 +49,11 @@ ListNode* sortList(ListNode* head) {
     if (!head || !head->next) {
         return head;
     }
-    ListNode* fast = head;
+    ListNode* fast = head->next;
     ListNode* slow = head;
 
     // Find the middle node
-    while (fast->next && fast->next->next) {
+    while (fast && fast->next) {
         fast = fast->next->next;
         slow = slow->next;
     }
